@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/sidebar";
 import { UseGame } from "@/contexts/GameContext";
 import {
-  Ship,
+  Pickaxe,
   LayoutDashboard,
   FileText,
   Rocket,
-  RotateCcw,
+  LogOut,
+  ShipWheel,
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ const mainNavItems: NavItem[] = [
   },
   {
     title: "Fleet",
-    icon: Ship,
+    icon: ShipWheel,
     url: "/fleet",
   },
   {
@@ -44,6 +45,11 @@ const mainNavItems: NavItem[] = [
     title: "Systems",
     icon: Rocket,
     url: "/systems",
+  },
+  {
+    title: "Mine Asteroid",
+    icon: Pickaxe,
+    url: "/mining",
   },
 ];
 
@@ -68,7 +74,7 @@ const AppSidebar = () => {
                   data-active={location.pathname === item.url}
                 >
                   <a href={item.url}>
-                    <item.icon className="h-4 w-4" />
+                    <item.icon className="h-5 w-5" />
                     <span>{item.title}</span>
                   </a>
                 </SidebarMenuButton>
@@ -82,8 +88,8 @@ const AppSidebar = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton onClick={handleNewGame}>
-              <RotateCcw className="h-4 w-4" />
-              <span>New Game</span>
+              <LogOut className="h-4 w-4" />
+              <span>Log Out</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

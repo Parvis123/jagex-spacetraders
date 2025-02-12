@@ -1,4 +1,4 @@
-import AppSidebar from "@/components/custom/AppSidebar";
+import AppSidebar from "@/components/custom/sideBar/AppSidebar";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";

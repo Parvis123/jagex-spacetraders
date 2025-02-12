@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 interface FactionsResponse {
   data: Faction[];
@@ -10,9 +11,10 @@ interface FactionsResponse {
 }
 
 const fetchFactions = async (): Promise<Faction[]> => {
-  const response = await fetch("https://api.spacetraders.io/v2/factions");
-  const data: FactionsResponse = await response.json();
-  return data.data.filter((faction) => faction.isRecruiting);
+  const response = await axios.get<FactionsResponse>(
+    "https://api.spacetraders.io/v2/factions"
+  );
+  return response.data.data.filter((faction) => faction.isRecruiting);
 };
 
 export function useFactions() {
