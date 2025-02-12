@@ -1,6 +1,6 @@
 import LoadingScreen from "@/components/custom/LoadingScreen";
 import PageHeader from "@/components/custom/PageHeader";
-import ShipRegisterForm from "@/components/custom/ShipRegisterForm";
+import AgentRegisterForm from "@/components/custom/AgentRegisterForm";
 import { useFactions } from "@/hooks/react-query-hooks/useFactions";
 
 const NewGame = () => {
@@ -23,9 +23,9 @@ const NewGame = () => {
       <div className="space-y-8 text-center w-full max-w-2xl px-4">
         <PageHeader
           title="New Game"
-          description="Register your spaceship's name & faction"
+          description="Register your agents's name & faction"
         />
-        <ShipRegisterForm factions={factions ?? []} />
+        <AgentRegisterForm factions={factions ?? []} />
       </div>
     </main>
   );

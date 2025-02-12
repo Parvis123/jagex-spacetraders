@@ -12,16 +12,22 @@ interface FactionSelectProps {
   factions: Faction[];
   onValueChange: (value: string) => void;
   error?: string;
+  disabled: boolean;
 }
 
 const FactionSelect = ({
   factions,
   onValueChange,
   error,
+  disabled,
 }: FactionSelectProps) => {
   return (
     <div className="space-y-2">
-      <Select onValueChange={onValueChange} defaultValue="COSMIC">
+      <Select
+        onValueChange={onValueChange}
+        defaultValue="COSMIC"
+        disabled={disabled}
+      >
         <SelectTrigger className="h-24 py-2">
           <SelectValue placeholder="Select faction" />
         </SelectTrigger>
