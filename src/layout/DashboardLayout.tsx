@@ -2,6 +2,7 @@ import AppSidebar from "@/components/custom/sideBar/AppSidebar";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
+import { Toaster } from "@/components/ui/toaster";
 
 const SidebarChevron = () => {
   const { toggleSidebar, state } = useSidebar();
@@ -33,6 +34,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="relative flex-1">
           <SidebarChevron />
           <main className="container p-6">{children}</main>
+          <Toaster />
         </div>
       </div>
     </SidebarProvider>

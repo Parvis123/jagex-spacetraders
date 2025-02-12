@@ -1,3 +1,4 @@
+import { useGetAgent } from "@/hooks/react-query-hooks/useGetAgent";
 import {
   createContext,
   useContext,
@@ -17,6 +18,7 @@ interface GameContextType {
   gameState: GameState;
   setGameState: (state: GameState) => void;
   resetGame: () => void;
+  refreshGameState: () => Promise<void>;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -35,6 +37,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     };
   });
 
+  const { mutateAsync: getAgent } = useGetAgent();
+
   // Update localStorage whenever gameState changes
   useEffect(() => {
     localStorage.setItem("spaceTraders_gameState", JSON.stringify(gameState));
@@ -51,8 +55,25 @@ export function GameProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("spaceTraders_gameState");
   };
 
+  const refreshGameState = async () => {
+    if (!gameState.token) return;
+    try {
+      const { agent, ships, contracts } = await getAgent(gameState.token);
+      setGameState({
+        ...gameState,
+        agent,
+        ships,
+        contracts,
+      });
+    } catch (error) {
+      console.error("Failed to refresh game state:", error);
+    }
+  };
+
   return (
-    <GameContext.Provider value={{ gameState, setGameState, resetGame }}>
+    <GameContext.Provider
+      value={{ gameState, setGameState, resetGame, refreshGameState }}
+    >
       {children}
     </GameContext.Provider>
   );
