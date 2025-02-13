@@ -65,46 +65,48 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="space-y-2">
-          <Textarea
-            placeholder="Enter your token"
-            className="min-h-[91px] resize-none"
-            {...register("token")}
-          />
-        </div>
+    <div className="min-h-[150px] flex flex-col">
+      <div className="flex-1 flex flex-col justify-center space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <Textarea
+              placeholder="Enter your token"
+              className="min-h-[91px] resize-none"
+              {...register("token")}
+            />
+          </div>
 
-        <Button
-          type="submit"
-          variant="secondary"
-          size="lg"
-          className="w-full"
-          disabled={isPending}
-        >
-          {isPending ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin mr-2" />
-              Verifying...
-            </>
-          ) : (
-            "Verify Token"
+          <Button
+            type="submit"
+            variant="secondary"
+            size="lg"
+            className="w-full"
+            disabled={isPending}
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                Verifying...
+              </>
+            ) : (
+              "Verify Token"
+            )}
+          </Button>
+          {errors.token && (
+            <p className="text-sm text-red-500">{errors.token.message}</p>
           )}
-        </Button>
-        {errors.token && (
-          <p className="text-sm text-red-500">{errors.token.message}</p>
-        )}
-      </form>
+        </form>
 
-      {verifyAgent && (
-        <AgentVerifyModal
-          agent={verifyAgent}
-          isOpen={!!verifyAgent}
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-        />
-      )}
-    </>
+        {verifyAgent && (
+          <AgentVerifyModal
+            agent={verifyAgent}
+            isOpen={!!verifyAgent}
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 

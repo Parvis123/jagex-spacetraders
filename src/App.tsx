@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NewGame from "./pages/NewGame";
 import { GameProvider } from "@/contexts/GameContext";
 import DashboardLayout from "./layout/DashboardLayout";
+
 import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
 import NotFound from "./pages/NotFound";
 import Fleet from "./pages/Fleet";
 import Shipyard from "./pages/Shipyard";
 
-function App() {
+const App = () => {
   return (
     <GameProvider>
       <Router>
@@ -56,6 +57,6 @@ function App() {
       </Router>
     </GameProvider>
   );
-}
+};
 
 export default App;

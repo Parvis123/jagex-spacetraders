@@ -12,8 +12,9 @@ import ShipCard from "@/components/custom/shipyard/ShipCard";
 import WaypointSelector from "@/components/custom/WaypointSelector";
 
 const Shipyard = () => {
-  const { gameState } = UseGame();
-  const { ships } = gameState;
+  const {
+    gameState: { ships, token },
+  } = UseGame();
   const { toast } = useToast();
   const [selectedWaypoint, setSelectedWaypoint] = useState<string>("");
 
@@ -21,13 +22,13 @@ const Shipyard = () => {
 
   const { data: waypoints, isLoading } = useWaypointsWithShipyard(
     systemSymbol ?? "",
-    gameState.token ?? ""
+    token ?? ""
   );
 
   const { data: shipyard } = useShipyard(
     systemSymbol ?? "",
     selectedWaypoint,
-    gameState.token ?? ""
+    token ?? ""
   );
 
   const { mutateAsync: purchaseShip, isPending } = usePurchaseShip();
@@ -45,7 +46,7 @@ const Shipyard = () => {
       await purchaseShip({
         shipType,
         waypointSymbol: selectedWaypoint,
-        token: gameState.token ?? "",
+        token: token ?? "",
       });
       toast({
         title: "Ship purchased successfully",

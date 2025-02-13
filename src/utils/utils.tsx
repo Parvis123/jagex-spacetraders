@@ -21,13 +21,12 @@ export const getFactionIcon = (factionSymbol: string) => {
     VOID: <Compass size={18} />,
     OBSIDIAN: <Eye size={18} />,
     AEGIS: <Shield size={18} />,
-  }[factionSymbol] || <Rocket size={16} />;
+  }[factionSymbol] || <Rocket size={18} />;
 
   return Icon;
 };
 
-export function formatString(str: string): string {
-  // this is really irritating, I shouldnt have to parse backend stuff consistently that I need a function for it in several files
+export const formatString = (str: string): string => {
   if (!str) return "";
 
   const words = str.split(/[_\s]+/);
@@ -35,4 +34,4 @@ export function formatString(str: string): string {
   return words
     .map((word) => word.charAt(0).toUpperCase() + word.toLowerCase().slice(1))
     .join(" ");
-}
+};

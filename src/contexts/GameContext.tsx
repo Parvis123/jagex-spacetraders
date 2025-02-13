@@ -23,7 +23,7 @@ interface GameContextType {
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
-export function GameProvider({ children }: { children: ReactNode }) {
+export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [gameState, setGameState] = useState<GameState>(() => {
     const savedState = localStorage.getItem("spaceTraders_gameState");
     if (savedState) {
@@ -77,12 +77,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
       {children}
     </GameContext.Provider>
   );
-}
+};
 
-export function UseGame() {
+export const UseGame = () => {
   const context = useContext(GameContext);
   if (context === undefined) {
     throw new Error("UseGame must be used within a GameProvider");
   }
   return context;
-}
+};

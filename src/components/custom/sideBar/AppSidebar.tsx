@@ -29,21 +29,23 @@ interface NavItem {
 }
 
 const AppSidebar = () => {
-  const { resetGame, gameState } = UseGame();
+  const {
+    resetGame,
+    gameState: { ships, token },
+  } = UseGame();
   const navigate = useNavigate();
-  const { ships } = gameState;
-
-  const handleNewGame = () => {
-    setTimeout(() => resetGame(), 1000);
-    navigate("/");
-  };
 
   const systemSymbol = ships[0]?.nav.systemSymbol;
 
   const { data: waypoints } = useWaypointsWithShipyard(
     systemSymbol ?? "",
-    gameState.token ?? ""
+    token ?? ""
   );
+
+  const handleNewGame = () => {
+    setTimeout(() => resetGame(), 1000);
+    navigate("/");
+  };
 
   const hasShipyardInSystem = waypoints && waypoints.length > 0;
 

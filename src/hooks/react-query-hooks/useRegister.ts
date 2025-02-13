@@ -16,7 +16,7 @@ interface ErrorResponse {
   };
 }
 
-export function useRegister() {
+export const useRegister = () => {
   return useMutation({
     mutationFn: async (data: RegisterData) => {
       try {
@@ -37,4 +37,4 @@ export function useRegister() {
       }
     },
   });
-}
+};

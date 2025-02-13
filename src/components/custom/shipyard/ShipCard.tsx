@@ -25,9 +25,9 @@ const ShipCard = ({
   isPending,
   waypointSymbol,
 }: ShipCardProps) => {
-  const { gameState } = UseGame();
-  const { ships } = gameState;
-
+  const {
+    gameState: { ships },
+  } = UseGame();
   // Check if any ship is at the current waypoint
   const hasShipInRange = ships.some(
     (ship) => ship.nav.waypointSymbol === waypointSymbol
@@ -63,7 +63,7 @@ const ShipCard = ({
             )}
             <Button
               onClick={() => onPurchase(shipType.type)}
-              disabled={isPending || !shipData}
+              disabled={isPending || !hasShipInRange}
               className="mt-2"
             >
               {!hasShipInRange ? "No ship in range" : "Purchase"}

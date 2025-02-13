@@ -1,40 +1,38 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { UseGame } from "@/contexts/GameContext";
+import { createApiClient } from "@/lib/api-client";
 
-export function useWaypointsWithShipyard(systemSymbol: string, token: string) {
+export const useWaypointsWithShipyard = (
+  systemSymbol: string,
+  token: string
+) => {
+  const api = createApiClient(token);
+
   return useQuery({
     queryKey: ["waypoints", systemSymbol],
     queryFn: async () => {
-      const response = await axios.get(
-        `https://api.spacetraders.io/v2/systems/${systemSymbol}/waypoints?traits=SHIPYARD`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      return response.data.data;
+      const {
+        data: { data },
+      } = await api.shipyard.getWaypoints(systemSymbol);
+      return data;
     },
   });
-}
+};
 
-export function useShipyard(
+export const useShipyard = (
   systemSymbol: string,
   waypointSymbol: string,
   token: string
-) {
+) => {
+  const api = createApiClient(token);
+
   return useQuery({
     queryKey: ["shipyard", waypointSymbol],
     queryFn: async () => {
-      const response = await axios.get(
-        `https://api.spacetraders.io/v2/systems/${systemSymbol}/waypoints/${waypointSymbol}/shipyard`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const {
+        data: { data },
+      } = await api.shipyard.getShipyard(systemSymbol, waypointSymbol);
 
-      const data = response.data.data;
-
-      // Ensure ships array exists even when no ships are in range
       return {
         ...data,
         ships:
@@ -50,9 +48,9 @@ export function useShipyard(
     },
     enabled: !!waypointSymbol,
   });
-}
+};
 
-export function usePurchaseShip() {
+export const usePurchaseShip = () => {
   const { refreshGameState } = UseGame();
 
   return useMutation({
@@ -65,18 +63,13 @@ export function usePurchaseShip() {
       waypointSymbol: string;
       token: string;
     }) => {
-      const response = await axios.post(
-        "https://api.spacetraders.io/v2/my/ships",
-        {
-          shipType,
-          waypointSymbol,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+      const api = createApiClient(token);
+      const { data } = await api.shipyard.purchaseShip(
+        shipType,
+        waypointSymbol
       );
       await refreshGameState();
-      return response.data;
+      return data;
     },
   });
-}
+};
