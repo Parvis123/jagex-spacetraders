@@ -30,11 +30,12 @@ const Contracts = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 w-full">
       <PageHeader
         title="Your Contracts"
         description="View and manage your active contracts"
       />
+
       <div className="space-y-8 w-full min-w-[200%] mx-auto">
         <ContractsList
           contracts={contracts}

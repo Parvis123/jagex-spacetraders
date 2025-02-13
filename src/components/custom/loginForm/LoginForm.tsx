@@ -70,7 +70,7 @@ const LoginForm = () => {
         <div className="space-y-2">
           <Textarea
             placeholder="Enter your token"
-            className="min-h-[148px] resize-none"
+            className="min-h-[91px] resize-none"
             {...register("token")}
           />
         </div>

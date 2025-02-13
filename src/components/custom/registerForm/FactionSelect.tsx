@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// component no longer needed, they updated their register method to do this on a portal
 interface FactionSelectProps {
   factions: Faction[];
   onValueChange: (value: string) => void;

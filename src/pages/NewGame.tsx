@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const NewGame = () => {
-  const { data: factions, isLoading, error } = useFactions();
+  const { isLoading, error } = useFactions();
   const [mode, setMode] = useState<"register" | "login">("register");
 
   if (isLoading) return <LoadingScreen />;
@@ -27,7 +27,7 @@ const NewGame = () => {
           title="Space Traders"
           description={
             mode === "register"
-              ? "Register your agent's name & faction"
+              ? "Create your account at SpaceTraders.io"
               : "Welcome back, space cowboy"
           }
         />
@@ -47,11 +47,7 @@ const NewGame = () => {
           </Button>
         </div>
 
-        {mode === "register" ? (
-          <AgentRegisterForm factions={factions ?? []} />
-        ) : (
-          <LoginForm />
-        )}
+        {mode === "register" ? <AgentRegisterForm /> : <LoginForm />}
       </div>
     </main>
   );

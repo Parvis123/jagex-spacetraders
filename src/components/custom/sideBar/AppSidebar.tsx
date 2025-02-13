@@ -16,7 +16,7 @@ import {
   Rocket,
   LogOut,
   ShipWheel,
-  ShipIcon,
+  Wrench,
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const AppSidebar = () => {
       title: "Shipyard",
       url: "/shipyard",
       disabled: !hasShipyardInSystem,
-      icon: ShipIcon,
+      icon: Wrench,
     },
     {
       title: "Contracts",

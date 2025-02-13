@@ -31,7 +31,22 @@ export function useShipyard(
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      return response.data.data;
+
+      const data = response.data.data;
+
+      // Ensure ships array exists even when no ships are in range
+      return {
+        ...data,
+        ships:
+          data.ships ||
+          data.shipTypes.map((type: { type: string }) => ({
+            type: type.type,
+            name: type.type,
+            description:
+              "Ship details are only available when a ship is in range",
+            purchasePrice: "???",
+          })),
+      };
     },
     enabled: !!waypointSymbol,
   });
