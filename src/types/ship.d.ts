@@ -116,3 +116,34 @@ interface Ship {
   mounts: ShipMount[];
   cargo: ShipCargo;
 }
+
+interface ShipyardShip {
+  type: string;
+  name: string;
+  description: string;
+  purchasePrice: number;
+  frame: ShipFrame;
+  reactor: ShipReactor;
+  engine: ShipEngine;
+  modules: ShipModule[];
+  mounts: ShipMount[];
+  crew: {
+    required: number;
+    capacity: number;
+  };
+}
+
+interface Shipyard {
+  symbol: string;
+  shipTypes: ShipyardShip[];
+  transactions: {
+    shipSymbol: string;
+    shipType: string;
+    waypointSymbol: string;
+    agentSymbol: string;
+    price: number;
+    timestamp: string;
+  }[];
+  ships: ShipyardShip[];
+  modificationsFee: number;
+}

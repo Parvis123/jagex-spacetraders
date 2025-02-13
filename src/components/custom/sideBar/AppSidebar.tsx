@@ -8,6 +8,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { UseGame } from "@/contexts/GameContext";
+import { useWaypointsWithShipyard } from "@/hooks/react-query-hooks/useShipyard";
 import {
   Pickaxe,
   LayoutDashboard,
@@ -15,6 +16,7 @@ import {
   Rocket,
   LogOut,
   ShipWheel,
+  ShipIcon,
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -23,44 +25,61 @@ interface NavItem {
   title: string;
   icon: LucideIcon;
   url: string;
+  disabled?: boolean;
 }
 
-const mainNavItems: NavItem[] = [
-  {
-    title: "Dashboard",
-    icon: LayoutDashboard,
-    url: "/dashboard",
-  },
-  {
-    title: "Fleet",
-    icon: ShipWheel,
-    url: "/fleet",
-  },
-  {
-    title: "Contracts",
-    icon: FileText,
-    url: "/contracts",
-  },
-  {
-    title: "Systems",
-    icon: Rocket,
-    url: "/systems",
-  },
-  {
-    title: "Mine Asteroid",
-    icon: Pickaxe,
-    url: "/mining",
-  },
-];
-
 const AppSidebar = () => {
-  const { resetGame } = UseGame();
+  const { resetGame, gameState } = UseGame();
   const navigate = useNavigate();
+  const { ships } = gameState;
 
   const handleNewGame = () => {
     setTimeout(() => resetGame(), 1000);
     navigate("/");
   };
+
+  const systemSymbol = ships[0]?.nav.systemSymbol;
+
+  const { data: waypoints } = useWaypointsWithShipyard(
+    systemSymbol ?? "",
+    gameState.token ?? ""
+  );
+
+  const hasShipyardInSystem = waypoints && waypoints.length > 0;
+
+  const mainNavItems: NavItem[] = [
+    {
+      title: "Dashboard",
+      icon: LayoutDashboard,
+      url: "/dashboard",
+    },
+    {
+      title: "Fleet",
+      icon: ShipWheel,
+      url: "/fleet",
+    },
+    {
+      title: "Shipyard",
+      url: "/shipyard",
+      disabled: !hasShipyardInSystem,
+      icon: ShipIcon,
+    },
+    {
+      title: "Contracts",
+      icon: FileText,
+      url: "/contracts",
+    },
+    {
+      title: "Systems",
+      icon: Rocket,
+      url: "/systems",
+    },
+    {
+      title: "Mine Asteroid",
+      icon: Pickaxe,
+      url: "/mining",
+    },
+  ];
 
   return (
     <Sidebar collapsible="icon">

@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Contracts from "./pages/Contracts";
 import NotFound from "./pages/NotFound";
 import Fleet from "./pages/Fleet";
+import Shipyard from "./pages/Shipyard";
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
             element={
               <DashboardLayout>
                 <Fleet />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/shipyard"
+            element={
+              <DashboardLayout>
+                <Shipyard />
               </DashboardLayout>
             }
           />

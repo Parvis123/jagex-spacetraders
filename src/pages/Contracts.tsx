@@ -13,8 +13,7 @@ const Contracts = () => {
 
   const handleAcceptContract = async (contractId: string) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      await acceptContract({ contractId, token: gameState.token! });
+      await acceptContract({ contractId, token: gameState.token ?? "" });
       toast({
         title: "Contract accepted successfully",
         description:
@@ -36,7 +35,7 @@ const Contracts = () => {
         title="Your Contracts"
         description="View and manage your active contracts"
       />
-      <div className="space-y-8 w-full min-w-[1500px] mx-auto">
+      <div className="space-y-8 w-full min-w-[200%] mx-auto">
         <ContractsList
           contracts={contracts}
           onAcceptContract={handleAcceptContract}
