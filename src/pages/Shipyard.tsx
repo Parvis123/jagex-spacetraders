@@ -8,7 +8,7 @@ import {
 import PageHeader from "@/components/custom/PageHeader";
 import { useState } from "react";
 import { AxiosError } from "axios";
-import ShipCard from "@/components/custom/shipyard/shipCard";
+import ShipCard from "@/components/custom/shipyard/ShipCard";
 import WaypointSelector from "@/components/custom/WaypointSelector";
 
 const Shipyard = () => {
