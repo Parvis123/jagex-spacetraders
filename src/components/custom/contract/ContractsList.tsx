@@ -11,6 +11,10 @@ const ContractsList = ({
   onAcceptContract,
   isPending,
 }: ContractsListProps) => {
+  if (contracts.length === 0) {
+    return <div className="text-center">No contracts available</div>;
+  }
+
   return (
     <div className="space-y-4">
       {contracts.map((contract) => (

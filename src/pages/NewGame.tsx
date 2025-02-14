@@ -7,18 +7,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const NewGame = () => {
-  const { isLoading, error } = useFactions();
+  const { isLoading } = useFactions();
   const [mode, setMode] = useState<"register" | "login">("register");
 
   if (isLoading) return <LoadingScreen />;
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-destructive">
-        Failed to load factions
-      </div>
-    );
-  }
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center text-foreground">
