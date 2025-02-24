@@ -21,7 +21,11 @@ export function useGetAgent() {
         api.agent.getMyContracts(),
       ]);
 
-      return { agent, ships, contracts };
+      return {
+        agent,
+        ships,
+        contracts,
+      };
     },
   });
 }

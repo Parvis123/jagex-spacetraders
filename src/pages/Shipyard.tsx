@@ -13,8 +13,10 @@ import WaypointSelector from "@/components/custom/WaypointSelector";
 
 const Shipyard = () => {
   const {
-    gameState: { ships, token },
+    gameState: { ships, token, agent },
   } = UseGame();
+
+  const { credits } = agent ?? { credits: 0 };
   const { toast } = useToast();
   const [selectedWaypoint, setSelectedWaypoint] = useState<string>("");
 
@@ -85,11 +87,16 @@ const Shipyard = () => {
     <div className="space-y-8">
       <PageHeader title="Shipyard" description="Purchase new ships" />
 
-      <WaypointSelector
-        waypoints={waypoints}
-        selectedWaypoint={selectedWaypoint}
-        onWaypointSelect={setSelectedWaypoint}
-      />
+      <div className="flex items-center gap-4">
+        <WaypointSelector
+          waypoints={waypoints}
+          selectedWaypoint={selectedWaypoint}
+          onWaypointSelect={setSelectedWaypoint}
+        />
+        <div className="text-primary">
+          Credits: {credits?.toLocaleString() ?? 0}
+        </div>
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {!selectedWaypoint ? (

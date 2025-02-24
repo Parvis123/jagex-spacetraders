@@ -36,7 +36,7 @@ const Contracts = () => {
         description="View and manage your active contracts"
       />
 
-      <div className="space-y-8 w-full min-w-[200%] mx-auto">
+      <div className="space-y-8 w-full mx-auto">
         <ContractsList
           contracts={contracts}
           onAcceptContract={handleAcceptContract}

@@ -29,11 +29,13 @@ interface DashboardLayoutProps {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <SidebarProvider defaultOpen>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen w-full">
         <AppSidebar />
-        <div className="relative flex-1">
+        <div className="relative flex-1 w-full">
           <SidebarChevron />
-          <main className="container p-6">{children}</main>
+          <main className="w-full p-6 max-w-none overflow-x-hidden">
+            {children}
+          </main>
           <Toaster />
         </div>
       </div>

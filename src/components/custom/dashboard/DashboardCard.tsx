@@ -1,5 +1,3 @@
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-
 interface DashboardCardProps {
   title: string;
   children: React.ReactNode;
@@ -7,12 +5,12 @@ interface DashboardCardProps {
 
 const DashboardCard = ({ title, children }: DashboardCardProps) => {
   return (
-    <Card>
-      <CardHeader>
-        <h3 className="font-semibold">{title}</h3>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
+    <div className="rounded-lg border bg-card p-4 text-card-foreground shadow">
+      <div className="space-y-2">
+        <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+        {children}
+      </div>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ const PageHeader = ({ title, description }: PageHeaderProps) => {
       <h1 className="text-4xl font-bold tracking-tight lg:text-5xl text-zinc-50">
         {title}
       </h1>
-      <p className="text-lg text-zinc-200">{description}</p>
+      <p className="text-lg pl-1 text-zinc-200">{description}</p>
     </div>
   );
 };
